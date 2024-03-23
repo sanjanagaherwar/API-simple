@@ -20,3 +20,6 @@ npm ls @babel/preset-env
 npm cache clean --force
 npm i http-status-codes 
 npm remove body-parser 
+server.js is the main file
+created models, services folder 
+made some changes please refer to commit -
