@@ -1,5 +1,5 @@
 import express from 'express';
-import { StatusCodes } from 'http-status-codes';
+
 
 import appRoutes from './routes';
 

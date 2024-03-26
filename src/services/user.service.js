@@ -8,8 +8,8 @@ const getUser = (userID) =>{
     userDao.get(userID);
 };
 
-const updateUser = (userID) =>{
-    userDao.update(userID);
+const updateUser = (userID, details) =>{
+    return userDao.update(userID, details);
 };
 
 const removeUser = (userID) =>{

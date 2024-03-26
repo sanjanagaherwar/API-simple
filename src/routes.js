@@ -4,7 +4,7 @@ import { StatusCodes } from 'http-status-codes';
 import userService from './services/user.service';
 
 const router = express.Router();
-const port = 3000;
+
 
 const STATUS = {
     success:'OK',
@@ -12,15 +12,15 @@ const STATUS = {
 };
 
 //localhost:3000/
-router.get('/hello-me', (req, res) => {
+router.get('/hellome', (req, res) => {
     res.status(StatusCodes.OK);
     res.send('Hello Sanjana!' ); // Send an object as the response
 });
   
 router.post('/add', (req,res)=>{
     // const data = []; //send some data, array
-    const { body: users } = req;
-    data.push(req.body); //push to add what we recieve from the body
+    const { body: user } = req;
+    // data.push(req.body); //push to add what we recieve from the body
     //const data = req.body;
     
     const addedUser = userService.addUser(user);
@@ -36,6 +36,26 @@ router.post('/add', (req,res)=>{
       status: STATUS.success,
       message: addedUser,
     }); //send the data to the browser from the req
+});
+
+router.put('/update/:id', (req,res)=>{
+    const { body: user } = req;
+    
+    const id = parseInt(req.params.id, 10)
+
+    const updatedUser = userService.updatedUser(id, user);
+    
+    if(updatedUser){
+        return res.status(StatusCodes.CREATED).send({
+        status: STATUS.success,
+        message: updatedUser,
+        });
+    } else {
+        return res.status(StatusCodes.NOT_FOUND).send({
+            status: STATUS.success,
+            message: `User ${id} is not found`,
+        });
+    }
 });
 
 export default router;
