@@ -52,7 +52,7 @@ router.put('/update/:id', (req,res)=>{
         });
     } else {
         return res.status(StatusCodes.NOT_FOUND).send({
-            status: STATUS.success,
+            status: STATUS.failure,
             message: `User ${id} is not found`,
         });
     }

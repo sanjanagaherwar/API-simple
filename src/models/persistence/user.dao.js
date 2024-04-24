@@ -11,7 +11,7 @@ const insert = (details) =>{
 const get = (userID) =>{
     const findUser = users.find(user => {
         if (users.id === userID){
-            return users;
+            return user;
         }
         return null
     });
@@ -25,8 +25,8 @@ const getAll =()=>{
 const update = (newDetails) =>{
     users.map((user, index) => {
         if (user.id === newDetails.id){
-
-        }
+            
+        } 
     });
 }
 
