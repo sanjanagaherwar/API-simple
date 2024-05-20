@@ -43,13 +43,10 @@ router.put('/update/:id', (req,res)=>{
     
     const id = parseInt(req.params.id, 10)
 
-    const updatedUser = userService.updatedUser(id, user);
+    const updatedUser = userService.updateUser(id, user);
     
     if(updatedUser){
-        return res.status(StatusCodes.CREATED).send({
-        status: STATUS.success,
-        message: updatedUser,
-        });
+        return res.status(StatusCodes.OK).send(updatedUser)
     } else {
         return res.status(StatusCodes.NOT_FOUND).send({
             status: STATUS.failure,
