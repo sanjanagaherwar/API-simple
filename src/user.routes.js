@@ -6,17 +6,22 @@ import userService from './services/user.service';
 const router = express.Router();
 
 
-const STATUS = {
-    success:'OK',
-    failure: 'NO'
-};
+// const STATUS = {
+//     success:'OK',
+//     failure: 'NO'
+// };
 
-//localhost:3000/
-router.get('/hellome', (req, res) => {
-    res.status(StatusCodes.OK);
-    res.send('Hello Sanjana!' ); // Send an object as the response
+
+router.get('/all', (req,res)=>{
+    const users = userService.getAllUsers();
+
+    if (users.length){
+        return res.status(StatusCodes.OK).send(users);
+    }
+    return res.status(StatusCodes.NOT_FOUND).send(`No users found.`);
+    
 });
-  
+
 router.post('/add', (req,res)=>{
     // const data = []; //send some data, array
     const { body: user } = req;
@@ -32,10 +37,8 @@ router.post('/add', (req,res)=>{
     //   });
     // }
     
-    return res.status(StatusCodes.CREATED).send({
-      status: STATUS.success,
-      message: addedUser,
-    }); //send the data to the browser from the req
+    return res.status(StatusCodes.CREATED).send(addedUser);
+ //send the data to the browser from the req
 });
 
 router.put('/update/:id', (req,res)=>{
@@ -48,11 +51,10 @@ router.put('/update/:id', (req,res)=>{
     if(updatedUser){
         return res.status(StatusCodes.OK).send(updatedUser)
     } else {
-        return res.status(StatusCodes.NOT_FOUND).send({
-            status: STATUS.failure,
-            message: `User ${id} is not found`,
-        });
+        return res.status(StatusCodes.NOT_FOUND).send(`User ${id} is not found.`);
     }
 });
+
+
 
 export default router;
