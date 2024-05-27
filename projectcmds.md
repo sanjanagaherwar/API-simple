@@ -1,3 +1,4 @@
+Hii, this is a simple api project
 node --version     //prints the installed version of Node.js in the terminal
 nvm ls             //list all the installed versions of Node.js managed by NVM (Node Version Manager) in your system
 npm -v             //check the version of npm (Node Package Manager) installed on your system
