@@ -2,7 +2,8 @@ import users from '../data/users.data';
 
 const insert = (details) =>{
     //users[0]=id:1
-    const newUser = { ...details, id: users.length+1 };
+    const newUser = { id: users.length+1 ,
+        ...details };
     users.push(newUser);
 
     return newUser;
@@ -10,7 +11,7 @@ const insert = (details) =>{
 
 const get = (userID) =>{
     const findUser = users.find(user => {
-        if (users.id === userID){
+        if (user.id === userID){
             return user;
         }
         return null
@@ -47,16 +48,13 @@ const update = (userID, newDetails) => {
 };
 
 
-const remove = (userID) =>{
-    const deleteUser = (user, index)=>{
-        if (user.id === userID) {
-            //remove the array element of the found user
-            users.splice(index, deleteCount=1);
-            return true;
-        }
-        return false;
-    };
-    return users.find(deleteUser)
+const remove = (userID) => {
+    const index = users.findIndex(user => user.id === userID);
+    if (index !== -1) {
+        users.splice(index, 1);
+        return true;
+    }
+    return false;
 }
 
 export default{

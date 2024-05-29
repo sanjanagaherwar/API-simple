@@ -22,6 +22,18 @@ router.get('/all', (req,res)=>{
     
 });
 
+router.get('/:id', (req,res)=>{
+    const id = parseInt(req.params.id, 10)
+
+    const user = userService.getUser(id);
+
+    if (user){
+        return res.status(StatusCodes.OK).send(user);
+    }
+    return res.status(StatusCodes.NOT_FOUND).send(`User ${id} not found.`);
+    
+});
+
 router.post('/add', (req,res)=>{
     // const data = []; //send some data, array
     const { body: user } = req;
@@ -55,6 +67,16 @@ router.put('/update/:id', (req,res)=>{
     }
 });
 
+router.delete('/delete/:id', (req,res)=>{
+    const { params } = req;
 
+    const id = parseInt(req.params.id, 10);
+
+    const status = userService.removeUser(id);
+    if (status ===  true){
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(`Failed to delete user ${id}`);
+    }
+    return res.status(StatusCodes.OK).send(`User ${id} deleted`)
+})
 
 export default router;
